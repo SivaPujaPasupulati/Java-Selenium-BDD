@@ -1,0 +1,132 @@
+QUESTION A. - code
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.GeckoDriverInfo;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+public class CrossBrowserScript {
+
+    WebDriver driver;
+    @BeforeTest
+    public void a()
+    {
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\pa.puja\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.get("https://www.geminisolutions.com/");
+    }
+    @BeforeTest
+    public void b()
+    {
+        System.setProperty("webdriver.gecko.driver", "C:\\Users\\pa.puja\\Downloads\\geckodriver_win32\\geckodriver.exe");
+        driver = new GeckoDriver();
+       driver.get("https://www.geminisolutions.com/");
+    }
+    @BeforeTest
+    public void c()
+    {
+        System.setProperty("webdriver.edge.driver", "C:\\Users\\pa.puja\\Downloads\\MicrosoftWebDriverdriver_win32\\MicrosoftWebDriverdriver.exe");
+        driver = new InternetExplorerDriver();
+        driver.get("https://www.geminisolutions.com/");
+    }
+    @Parameters("browser")
+    public void setup(String browser) throws Exception{
+        if(browser.equalsIgnoreCase("firefox")){
+            String currentUrl= driver.getCurrentUrl();
+            assertEquals(current_url,"https://www.geminisolutions.com/");
+        }
+
+        }
+        else if(browser.equalsIgnoreCase("chrome")){
+        String currentUrl= driver.getCurrentUrl();
+        assertEquals(current_url,"https://www.geminisolutions.com/");
+    }
+        else if(browser.equalsIgnoreCase("Edge")){
+        String currentUrl= driver.getCurrentUrl();
+        assertEquals(current_url,"https://www.geminisolutions.com/");
+    }
+        }
+        else{
+            throw new Exception("Browser is not correct");
+        }
+
+        @Test
+        public void testt() throws InterruptedException{
+        driver.get("https://www.geminisolutions.com/");
+        if(browser.equalsIgnoreCase("Edge")){
+        String currentUrl=driver.getCurrentUrl();
+        String s=currentUrl.getTitle();
+        assertEquals(s,"gemini solutions");
+        domComplete=driver.execute_script("return window.performance.timing.domComplete");}
+
+        if(browser.equalsIgnoreCase("chrome")){
+        String currentUrl=driver.getCurrentUrl();
+        String s=currentUrl.getTitle();
+        assertEquals(s,"gemini solutions");
+        domComplete1=driver.execute_script("return window.performance.timing.domComplete");}
+
+        if(browser.equalsIgnoreCase("firefox"))
+
+        String currentUrl=driver.getCurrentUrl();{
+        String s=currentUrl.getTitle();
+        assertEquals(s,"gemini solutions");
+        domComplete2=driver.execute_script("return window.performance.timing.domComplete");
+        }
+        print(sort(domComplete,domComplete1,domComplete2));
+        }
+
+QUESTION B. - Code
+package Selenium;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class iframes {
+    public static void main(String[] args) {
+
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\pa.puja\\Downloads\\chromedriver_win32\\chromedriver.exe");
+                WebDriver driver = new ChromeDriver();
+        driver.get("https://techtuts.in/");
+
+
+        int size = driver.findElements(By.tagName("iframe")).size();
+        System.out.println("Total number of iframes:  " + size); //Display total number of iFrames available on page.
+        for (int i = 0; i < size; i++) {               //Switch to all the iFrames on page one by one using loop.
+            WebDriver frame = driver.switchTo().frame(i);
+            System.out.println(frame.getTitle());
+        }
+
+        WebElement e = driver.findElement(By.name("google_esf")); //Click on the iFrame whose name = “google_esf”.
+        driver.switchTo().frame(e);
+        driver.findElement(By.name("google_esf")).click();
+        for (int i = 0; i < size; i++) {    //Click on the iFrame whose index = n-1, where n is the total number of iFrames on page.
+            if (i == size - 1) {
+                WebElement frame = (WebElement) driver.switchTo().frame(i);
+                frame.click();
+            }
+        }
+    }
+    }
+
+
+QUESTION C. - 
+Short answer
+1.Do iFrames have their own tags like <html>, <head>?
+sol:  An inline frame is used to embed another document within the current HTML document, as they are part of HTML own tags are not required.
+2.Can we access elements inside an iFrame when driver is on parent object?
+sol: For iframes, we can access parent/children windows using window.frames – a collection of nested window objects, window.
+3.In case of nested iFrames, what is the command to switch from innermost iFrame to outermost webpage?
+sol:switchTo().parentFrame()
+4.What is the command to move to immediate parent of iFrame?
+sol: switchTo().parentFrame()
+5.What is the difference between frames & iFrames?
+sol:iFrame in Selenium Webdriver is a web page or an inline frame which is embedded in another web page or 
+an HTML document embedded inside another HTML document while, Frames are for displaying content from another page into the current web page.
+6.Can we execute same TCs on different browsers at the same time?
+sol: We can by integrating Testng framework with Selenium WebDriver of any browser.
